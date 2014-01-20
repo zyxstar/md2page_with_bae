@@ -1,12 +1,14 @@
 #-*- coding:utf-8 -*-
 import web
 
-def app(environ, start_response):
-    status = '200 OK'
-    headers = [('Content-type', 'text/html')]
-    start_response(status, headers)
-    body=dir(web)
-    return body
 
-from bae.core.wsgi import WSGIApplication
-application = WSGIApplication(app)
+urls = ('/echo', 'echo')
+
+
+class echo:
+    def GET(self):
+        return "render.poplang(RES_BASE_URL_PATH)"
+
+app = web.application(urls, globals())
+
+app.run()
