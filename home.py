@@ -3,7 +3,7 @@ import os
 import web
 import urllib
 import urllib2
-import markdown
+import Markdown
 import re
 from lib import utils
 
