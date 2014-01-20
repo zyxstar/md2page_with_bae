@@ -1,23 +1,23 @@
-$def with (res_base_url)
+$def with (note,res_base_url)
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Markdown Note</title>
+    <title>Sample for Markdown To Page</title>
     <link rel='stylesheet' type='text/css' media='screen' href="$res_base_url/css/markdown.css" />
     <link rel='stylesheet' type='text/css' media='screen' href="$res_base_url/css/md_note.css" />
     <link rel='stylesheet' type='text/css' media='screen' href="$res_base_url/css/index.css"/>
 </head>
 
 <body style='zoom:1'>
-<h1>Markdown Note</h1>
+<h1>Sample for Markdown To Page</h1>
 <ul>
 <li>
     <h3>GET</h3>
 <form name="form2" method='get' action='/gen_md' target='_blank'>
 <label for='txt_src'>src[requirement] will urlencode by utf-8</label>
-<input type='text' name='src' id='txt_src' value='https://github.com/zyxstar/markdown_note/raw/master/doc/Manual.md'/>
+<input type='text' name='src' id='txt_src' value='https://github.com/zyxstar/markdown_note/raw/master/docs/Manual.md'/>
 <label for='txt_title'>title[optional]</label>
 <input type='text' name='title' id='txt_title' value='Manual'/>
 <label for='txt_encoding'>encoding[optional]</label>
@@ -29,52 +29,18 @@ $def with (res_base_url)
 <li>
     <h3>POST</h3>
   <form name="form2" method='post' action='/gen_md' target='_blank'>
-<label for='txt_note'>markdown</label>
-<textarea style="width:48%" rows='15' name='note' id="txt_note">
-概述
-====
-
-本工具主要是为了方便程序开发人员作笔记，能在文档中 __直接运行代码__ 小片断，从而提高笔记的效果。又因为文档的原始文件为纯文本格式，非常适合做 __版本管理__。
-
-快速使用
-========
-## 环境搭建
-### python(必选)
-- 建议使用版本2.7.x，windows环境下可使用[activepython](http://www.activestate.com/activepython/downloads)
-- 在cmd中进入Python27\Scripts\目录，运行`easy_install markdown`安装python的Markdown模块
-
-### java(可选)
-- 如果仅需要制作javascript相关的笔记，则不需要安装java环境，但 __如果需要运行其它语言时，则java环境是必装的__，因为运行其它语言的机制是，通过java编写的applet来调用本地的语言解析器，并将运行结果返回至applet，再显示到页面上。
-- 安装完了java后，还需要在浏览器上启用java，如chrome，在地址栏输入`chrome://plugins/`，查看`Java(TM)`是否启动
-- 打开 控制面板 - Java (32bit) - Security，设置为Medium
-- 在Java\jre7\lib\security\java.policy文件(请确定该java版本是浏览器使用的版本)里最后加上`permission java.security.AllPermission;`，修改该文件时，修改者首先需要具备可修改的权限(以上权限的修改，由可能引起安全隐患，使用者可在运行完文档后，酌情还原)
-- 如需要重新生成applet，[查看](../applet/ReadMe.html)，这种情况并不多见
-
-### 环境变量(可选)
-- 语言的编译器(解析器)工具需要在环境变量中配置，如python.exe、ruby.exe、java.exe、javac.exe、csc.exe等 __所在的目录__ 需要添加到环境变量PATH中
-
-## 创建文档
-以创建xx文件为例，在`md_note/doc`中创建`xx.md`文件
-
-## 编写文档
-主要使用[Markdown](http://zh.wikipedia.org/wiki/Markdown)来编写文档
-
-
+<label for='txt_note'>note[requirement]</label>
+<textarea rows='15' name='note' id="txt_note">
+$note
 </textarea>
-<label for='txt_title'>title</label>
+<label for='txt_title'>title[requirement]</label>
 <input type='text' name='title' id='txt_title' value='Manual'/>
-<label for='txt_based_url'>based_url</label>
-<input type='text' name='based_url' id='txt_based_url' value='http://raw2.github.com/zyxstar/note/master/doc/'/>
+<label for='txt_based_url'>based_url[optional]</label>
+<input type='text' name='based_url' id='txt_based_url' value='http://raw2.github.com/zyxstar/note/master/docs/'/>
 <input type='submit'/>
 </form>
 </li>
 </ul>
-
-
-
-
-
-
 
 
 

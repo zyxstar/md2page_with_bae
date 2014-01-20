@@ -9,6 +9,8 @@ from lib import utils
 
 RES_BASE_URL_PATH = '//rawgithub.com/zyxstar/markdown2page/master/res'
 
+
+
 urls = ('/', 'index',
         '/echo', 'echo',
         '/gen_md','gen_md',
@@ -23,7 +25,8 @@ render = web.template.render(templates_root)
 
 class index:
     def GET(self):
-        return render.index(RES_BASE_URL_PATH)
+        _sample_note = urllib2.urlopen("https://github.com/zyxstar/markdown_note/raw/master/docs/Manual.md").read()
+        return render.index(_sample_note, RES_BASE_URL_PATH)
 
 class poplang:
     def GET(self):
