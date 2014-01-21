@@ -16,11 +16,11 @@ $def with (note,res_base_url)
 <li>
     <h3>GET</h3>
 <form name="form2" method='get' action='/gen_md' target='_blank'>
-<label for='txt_src'>src[requirement] urlencode by utf-8</label>
+<label for='txt_src'>src[requirement], urlencode by utf-8</label>
 <input type='text' name='src' id='txt_src' value='https://github.com/zyxstar/markdown_note/raw/master/docs/Manual.md'/>
-<label for='txt_title'>title[optional]</label>
+<label for='txt_title'>title[optional], default is filename extracted from src</label>
 <input type='text' name='title' id='txt_title' value='Manual'/>
-<label for='txt_encoding'>encoding[optional] file encoding, default is utf-8</label>
+<label for='txt_encoding'>encoding[optional], file encoding, default is utf-8</label>
 <input type='text' name='encoding' id='txt_encoding' value='utf-8'/>
 
 <input type='submit'/>
@@ -35,8 +35,8 @@ $note
 </textarea>
 <label for='txt_title'>title[requirement]</label>
 <input type='text' name='title' id='txt_title' value='Manual'/>
-<label for='txt_based_url'>based_url[optional]</label>
-<input type='text' name='based_url' id='txt_based_url' value='http://raw2.github.com/zyxstar/note/master/docs/Manual.md'/>
+<label for='txt_based_url'>based_url[optional], fix links (such as img, a) when using a relative path</label>
+<input type='text' name='based_url' id='txt_based_url' value='https://github.com/zyxstar/markdown_note/raw/master/docs/Manual.md'/>
 <input type='submit'/>
 </form>
 </li>
