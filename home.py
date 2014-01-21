@@ -7,8 +7,8 @@ import markdown
 import re
 from lib import utils
 
-RES_BASE_URL_PATH = '//rawgithub.com/zyxstar/markdown2page/master/res'
-
+RES_BASE_URL_PATH = "//rawgithub.com/zyxstar/markdown2page/master/res"
+SAMPLE_NOTE_URL = "https://raw2.github.com/zyxstar/markdown_note/master/docs/Manual.md"
 
 urls = ('/', 'index',
         '/echo', 'echo',
@@ -24,7 +24,7 @@ render = web.template.render(templates_root)
 
 class index:
     def GET(self):
-        _sample_note = urllib2.urlopen("https://github.com/zyxstar/markdown_note/raw/master/docs/Manual.md").read()
+        _sample_note = urllib2.urlopen(SAMPLE_NOTE_URL).read()
         return render.index(_sample_note, RES_BASE_URL_PATH)
 
 class poplang:
