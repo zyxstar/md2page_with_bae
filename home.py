@@ -24,7 +24,10 @@ render = web.template.render(templates_root)
 
 class index:
     def GET(self):
-        _sample_note = urllib2.urlopen(SAMPLE_NOTE_URL).read()
+        try:
+            _sample_note = urllib2.urlopen(SAMPLE_NOTE_URL).read()
+        except:
+            _sample_note = ""
         return render.index(_sample_note, RES_BASE_URL_PATH)
 
 class poplang:
@@ -52,7 +55,10 @@ class echo:
 class gen_md:
     def GET(self):
         _query = web.input(src='',title='',encoding='utf-8')
-        _md_text = urllib2.urlopen(_query.src).read()
+        try:
+            _md_text = urllib2.urlopen(_query.src).read()
+        except Exception, e:
+            return e.message
         _title = os.path.basename(_query.src).split('.')[0] if _query.title == '' else _query.title
         _title = urllib.unquote_plus(_title.encode('utf-8'))
         return self.render_md(_title,unicode(_md_text, _query.encoding),_query.src)
