@@ -54,14 +54,14 @@ class echo:
 
 class gen_md:
     def GET(self):
-        _query = web.input(src='',title='',encoding='utf-8')
         try:
+            _query = web.input(src='',title='',encoding='utf-8')
             _md_text = urllib2.urlopen(_query.src).read()
+            _title = os.path.basename(_query.src).split('.')[0] if _query.title == '' else _query.title
+            _title = urllib.unquote_plus(_title.encode('utf-8'))
+            return self.render_md(_title,unicode(_md_text, _query.encoding),_query.src)
         except Exception, e:
             return e.message
-        _title = os.path.basename(_query.src).split('.')[0] if _query.title == '' else _query.title
-        _title = urllib.unquote_plus(_title.encode('utf-8'))
-        return self.render_md(_title,unicode(_md_text, _query.encoding),_query.src)
 
     def POST(self):
         _query = web.input(note='',title='',based_url='')
