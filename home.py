@@ -8,7 +8,8 @@ import re
 import traceback
 from lib import utils
 
-RES_BASE_URL_PATH = "//rawgithub.com/zyxstar/markdown2page/master/res"
+# RES_BASE_URL_PATH = "//rawgithub.com/zyxstar/markdown2page/master/res"
+RES_BASE_URL_PATH = "/static"
 SAMPLE_NOTE_URL = "https://raw2.github.com/zyxstar/markdown_note/master/docs/Manual.md"
 
 urls = ('/', 'index',
