@@ -1,3 +1,4 @@
 /web/*.pyc
 *.pyc
 /index.py
+*.bat

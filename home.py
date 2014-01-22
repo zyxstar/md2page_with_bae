@@ -5,6 +5,7 @@ import urllib
 import urllib2
 import markdown
 import re
+import traceback
 from lib import utils
 
 RES_BASE_URL_PATH = "//rawgithub.com/zyxstar/markdown2page/master/res"
@@ -24,7 +25,10 @@ render = web.template.render(templates_root)
 
 class index:
     def GET(self):
-        _sample_note = urllib2.urlopen(SAMPLE_NOTE_URL).read()
+        try:
+            _sample_note = urllib2.urlopen(SAMPLE_NOTE_URL,timeout=5).read()
+        except:
+            _sample_note = ""
         return render.index(_sample_note, RES_BASE_URL_PATH)
 
 class poplang:
@@ -51,12 +55,14 @@ class echo:
 
 class gen_md:
     def GET(self):
-        _query = web.input(src='',title='',encoding='utf-8')
-        _md_text = urllib2.urlopen(_query.src).read()
-        _title = os.path.basename(_query.src).split('.')[0] if _query.title == '' else _query.title
-        _title = urllib.unquote_plus(_title.encode('utf-8'))
-        return self.render_md(_title,unicode(_md_text, _query.encoding),_query.src)
-
+        try:
+            _query = web.input(src='',title='',encoding='utf-8')
+            _md_text = urllib2.urlopen(_query.src,timeout=5).read()
+            _title = os.path.basename(_query.src).split('.')[0] if _query.title == '' else _query.title
+            _title = urllib.unquote_plus(_title.encode('utf-8'))
+            return self.render_md(_title,unicode(_md_text, _query.encoding),_query.src)
+        except:
+            return traceback.format_exc()
 
     def POST(self):
         _query = web.input(note='',title='',based_url='')
