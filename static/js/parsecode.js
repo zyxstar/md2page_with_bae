@@ -50,7 +50,7 @@ function parse_web_code(ifrm_container,html_code,js_code,css_code){
         return arguments[0];
     });
 
-    var temp="<script type='text\/javascript' src='../vendor\/$path.js'><\/script>";
+    var temp="<script type='text\/javascript' src='\/static\/vendor\/$path.js'><\/script>";
 
     matchs.forEach(function(s){
         var idx=s.indexOf('.')==-1 ? s.length : s.indexOf('.');
