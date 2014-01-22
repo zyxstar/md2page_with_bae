@@ -40,19 +40,16 @@
 
     </div>
     <div id="sidebar" style="opacity: 1;">
-    <h3>Reminder:</h3>
+    <h3>提示:</h3>
         <ul>
         <li>
-           Depends on <a target='_blank' href='http://codemirror.net/'>"CodeMirror"</a>
-        </li>
-
-        <li>
-           Press <strong>F11</strong> when cursor is in the editor to toggle full screen editing. <strong>Esc</strong> can also be used to exit full screen editing.
+           在编辑框内按 <strong>F11</strong> 进入全屏, 再次按 <strong>F11/Esc</strong> 通出全屏
         </li>
   </ul>
 
-    <h3>CDN Libraries:</h3>
+    <h3>常用CDN:</h3>
  <ul>
+    <li>可直接在html编辑器中包含进来</li>
         <li>
             <a target='_blank' href='https://developers.google.com/speed/libraries/devguide'>Google Hosted Libraries</a>
         </li>
@@ -70,13 +67,26 @@
 
         </ul>
 
-    <h3>Local Libraries:</h3>
-   <li> Local Libraries folder at <strong>"/vendor"</strong></li>
+    <h3>在js编辑器中引入库:</h3>
     <li>
-usage: eg. In the "JavaScript Editor", enter "<code>//import jquery.1.9.0</code>" means that the following code is generated in html "<strong>
+使用方式: 键入 "<code>//import jquery.1.9.0</code>" 将在生成的html中产生<strong>
 &lt;script type="text/javascript"
 src="../vendor/jquery/1.9.0/jquery.js"&gt;&lt;/script&gt;
 </strong>"</li>
+  <li>
+目前支持的库有:
+       <ul>
+        <li>jquery.1.9.0</li>
+        <li>jquery.2.0.0</li>
+        <li>backbone.0.9.2</li>
+        <li>backbone.1.0.0</li>
+        <li>underscore.1.4.3</li>
+        <li>underscore.1.5.2</li>
+        <li>json2</li>
+        <li>bootstrap.2.3.2</li>
+
+ </ul>
+   </li>
      <!--    <div id="sidebar-bottom"></div>
         <a class="keyActions" href=""></a> -->
     </div>
