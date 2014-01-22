@@ -79,8 +79,6 @@ class gen_md:
 
 
 
-
-
 app = web.application(urls, globals()).wsgifunc()
 
 from bae.core.wsgi import WSGIApplication
