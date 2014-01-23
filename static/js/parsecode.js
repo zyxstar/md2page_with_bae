@@ -155,7 +155,7 @@ function Native_code_parser(applet_runner, lang) {
     }
   }
   if (cfg === null)
-    alert("This language is not yet supported");
+    alert("This language is not yet supported on the applet running");
 
 
   this.get_version = function() {

@@ -85,60 +85,47 @@ function route_lang_handler(pre_el) {
     pre_el.parentElement.removeChild(pre_el);
   }
 
-  function lang_hand1er(lang) {
+  function lang_hand1er(lang, is_run_applet, is_run_online) {
     return function() {
       pre_el.className = "brush: " + lang + ";";
       pre_el.innerHTML = code;
       if (needrun)
-        create_run(pre_el, lang, code);
+        create_run(pre_el, lang, code, is_run_applet, is_run_online);
     };
   }
 
-  var cfg = {
-    "web": web_handler,//extend
+  var trans_lang={
+    "tab":"table",
+    "c#":"csharp",
+    "py":"python",
+    "rb":"ruby",
+    "erl":"erlang",
+    "javascript":"js",
+    "actionscript3":"as3",
+    "htm":"html",
+    "pl":"perl",
+    "ps":"powershell"
+  }
 
-    "tab": table_handler, //extend
-    "table": table_handler, //extend
+  language = trans_lang[language] || language;
 
-    "as3": lang_hand1er("as3"),
-    "actionscript3": lang_hand1er("as3"),
-    "bash": lang_hand1er("bash"),
-    "c": lang_hand1er("c"),
-    "cpp": lang_hand1er("cpp"),
+  var extend_handlers = {
+    "web": web_handler,
+    "table": table_handler,
+    "c": lang_hand1er("c",false,true),
+    "cpp": lang_hand1er("cpp",false,true),
+    "csharp": lang_hand1er("csharp",true,true),
+    "python": lang_hand1er("python",true,true),
+    "ruby": lang_hand1er("ruby",true,true),
+    "js": lang_hand1er("js"),
+    "java": lang_hand1er("java",true,true),
+  }
 
-    "c#": lang_hand1er("csharp"), //extend
-    "csharp": lang_hand1er("csharp"), //extend
-
-    "css": lang_hand1er("css"),
-    "delphi": lang_hand1er("delphi"),
-    "erl": lang_hand1er("erlang"),
-    "erlang": lang_hand1er("erlang"),
-    "groovy": lang_hand1er("groovy"),
-    "html": lang_hand1er("html"),
-
-    "java": lang_hand1er("java"),
-    "js": lang_hand1er("js"), //extend
-    "javascript": lang_hand1er("js"), //extend
-
-    "pascal": lang_hand1er("pascal"),
-    "pl": lang_hand1er("perl"),
-    "perl": lang_hand1er("perl"),
-    "php": lang_hand1er("php"),
-    "plain": lang_hand1er("plain"),
-    "ps": lang_hand1er("powershell"),
-    "powershell": lang_hand1er("powershell"),
-
-    "py": lang_hand1er("python"), //extend
-    "python": lang_hand1er("python"), //extend
-    "rb": lang_hand1er("ruby"), //extend
-    "ruby": lang_hand1er("ruby"), //extend
-
-    "scala": lang_hand1er("scala"),
-    "shell": lang_hand1er("shell"),
-    "sql": lang_hand1er("sql"),
-    "xml": lang_hand1er("xml")
+  var default_handlers = function(){
+    var langs = ["as3","bash","css","delphi","erlang","groovy","html","pascal","perl","php","powershell","scala","shell","sql","xml"];
+    return lang_hand1er(langs.filter(function(_lang){return _lang===language})[0] || 'plain', false, false);
   };
-  return cfg[language] || Function.prototype;
+  return extend_handlers[language] || default_handlers();
 }
 
 
@@ -148,22 +135,24 @@ function route_lang_handler(pre_el) {
 //而以网络方式打开时则可以访问
 //以window.open("")的方式，由代码生成子窗口，则没有权限受限
 
-function create_run(pre, lang, code) {
+function create_run(pre, lang, code, is_run_applet, is_run_online)  {
 
   var width=screen.availWidth*0.8;
   var height=screen.availHeight*0.8;
 
   if (lang === "js") {
-    create_run_button(pre,"►",'web',width,height,{html:"",js:code,css:""});
+    create_run_button(pre,"►js",'web',width,height,{html:"",js:code,css:""});
   }
   else if(lang==='web'){
-    create_run_button(pre,"►Web",'web',width,height,code);
+    create_run_button(pre,"►web",'web',width,height,code);
   }
   else{
     width = screen.availWidth*0.4;
-    create_run_button(pre,"►",'lang',width,height,{lang:lang,code:code});
-    //只能使用url? 不能使用url# 否则打开新页面不会刷新
-    create_run_button(pre,"►Online",'lang?online',width,height,{lang:lang,code:code});
+    if(is_run_applet)
+      create_run_button(pre,"►applet",'lang',width,height,{lang:lang,code:code});
+      //只能使用url? 不能使用url# 否则打开新页面不会刷新
+    if(is_run_online)
+      create_run_button(pre,"►online",'lang?online',width,height,{lang:lang,code:code});
   }
 
 }
