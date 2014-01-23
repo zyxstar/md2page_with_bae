@@ -45,10 +45,14 @@ var code_parser, code_editor;
 
 function get_lang_cfgs(){
     return [
-        {lang:'python', modename:'python'},
-        {lang:'ruby', modename:'ruby'},
-        {lang:'csharp', modename:'text/x-csharp'},
-        {lang:'java', modename:'text/x-java'},
+        {lang:'python',lang_alias:'python', modename:'text/x-python', exec_type:'execute'},
+        {lang:'ruby', lang_alias:'ruby', modename:'text/x-ruby', exec_type:'execute'},
+        {lang:'c', lang_alias:'c', modename:'text/x-csrc', exec_type:'compile'},
+        {lang:'cpp', lang_alias:'cpp', modename:'text/x-c++src', exec_type:'compile'},
+        {lang:'csharp', lang_alias:'csharp', modename:'text/x-csharp', exec_type:'compile'},
+        {lang:'java', lang_alias:'java', modename:'text/x-java', exec_type:'compile'},
+        // {lang:'objective-c', lang_alias:'objc', modename:'text/x-csrc', exec_type:'compile'},
+        // {lang:'golang', lang_alias:'golang', modename:'text/x-go', exec_type:'execute'},
     ];
 }
 
@@ -127,8 +131,11 @@ function run_lang(){
 
     if(is_online){
         var frm_online=document.forms['frm_online'];
+        lang_cfg = get_lang_cfgs().filter(function(cfg){return cfg.lang===lang;})[0]
         frm_online.lang.value=lang;
+        frm_online.lang_alias.value=lang_cfg.lang_alias;
         frm_online.code.value=code;
+        frm_online.exec_type.value=lang_cfg.exec_type;
         frm_online.submit();
     } else{
         var txt_result = document.getElementById('txt_result');

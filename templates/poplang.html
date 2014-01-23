@@ -58,13 +58,11 @@
                 <span class="window_label" style="opacity: 0.8;">Result</span>
                 <textarea id="txt_result"></textarea>
 
-                <form name='frm_online' method='post' target='ifr_result' action='http://www.compileonline.com/execute_new.php'>
+                <form name='frm_online' method='post' target='ifr_result' action='/exec_lang'>
                   <input type='hidden' name='lang'/>
+                  <input type='hidden' name='lang_alias'/>
                   <input type='hidden' name='code'/>
-                  <input type='hidden' name='header'/>
-                  <input type='hidden' name='script' value='compile_new'/>
-                  <input type='hidden' name='args'/>
-                  <input type='hidden' name='stdinput'/>
+                  <input type='hidden' name='exec_type'/>
                 </form>
 
                 <iframe name='ifr_result' id="ifr_result"></iframe>
@@ -94,7 +92,7 @@
 <script type="text/javascript" src='$res_base_url/vendor/CodeMirror-3.12/mode/ruby/ruby.js'></script>
 <script type="text/javascript" src='$res_base_url/vendor/CodeMirror-3.12/mode/python/python.js'></script>
 <script type="text/javascript" src='$res_base_url/vendor/CodeMirror-3.12/mode/clike/clike.js'></script>
-
+<!-- <script type="text/javascript" src='$res_base_url/vendor/CodeMirror-3.12/mode/clike/go.js'></script> -->
 
 
 
