@@ -16,7 +16,7 @@ $def with (note,res_base_url)
 <ul>
 
 <li>
-    <h3>GET</h3>
+    <h3>GET with form</h3>
 <form name="form2" method='get' action='/gen_md' target='_blank'>
 <label for='txt_src'>src[requirement], urlencode by utf-8</label>
 <input type='text' name='src' id='txt_src' value='https://raw2.github.com/zyxstar/markdown_note/master/docs/Manual.md'/>
@@ -28,11 +28,12 @@ $def with (note,res_base_url)
 <input type='submit'/>
 </form>
 
-<a href='https://github.com/zyxstar/markdown_note/blob/master/README.md' target='_blank'>My Notes On Github</a>
-<br/>
-<a href='/gen_md?src=https%3A%2F%2Fgithub.com%2Fzyxstar%2Fmarkdown_note%2Fraw%2Fmaster%2FREADME.md'>My Notes Index</a>
-
 </li>
+
+<li>
+    <h3>GET with link</h3>
+    <a target='_blank' href='http://chinapub.duapp.com/gen_md?src=https%3A%2F%2Fraw2.github.com%2Fzyxstar%2Fmarkdown_note%2Fmaster%2Fdocs%2FManual.md'>Manual</a>
+
 <li>
     <h3>POST</h3>
   <form name="form2" method='post' action='/gen_md' target='_blank'>
