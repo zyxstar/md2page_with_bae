@@ -229,7 +229,7 @@ addEvent(window,'load',function(){
   <\/body>\n\
 <\/html>");
             editor_js.setValue("//import jquery.1.9.0\n");
-            editor_css.setValue("@import url(../css/normalize.css);\n");
+            editor_css.setValue("@import url(/static/css/normalize.css);\n");
         }else{
             var storage=window.localStorage||window.opener.md_codeStorage;
 
