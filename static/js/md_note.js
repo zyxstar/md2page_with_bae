@@ -12,8 +12,8 @@ function goto_top() {
 
 function goto_footer(){
   if (location.hash === '#footer') {
-    document.body.scrollTop = document.body.scrollHeight;
     document.documentElement.scrollTop = document.body.scrollHeight;
+    document.body.scrollTop = document.body.scrollHeight;
     var toc = document.getElementById('md_toc');
     toc.scrollTop = toc.scrollHeight;
   }
@@ -63,6 +63,11 @@ function lazyload_font() {
     }
 }
 
+function render_author_date(){
+    var el = document.getElementById("md_content").firstElementChild;
+    if(el && el.tagName == "BLOCKQUOTE")
+        addClass(el,"author-date");
+}
 
 (function() {
 
@@ -81,6 +86,8 @@ function lazyload_font() {
 
     addEvent(window, "resize", alter_toc_height);
     alter_toc_height();
+
+    render_author_date();
 
     var pres = document.getElementsByTagName('pre');
     Array.prototype.slice.call(pres).map(function(pre) {
