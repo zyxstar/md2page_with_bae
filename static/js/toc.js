@@ -3,16 +3,16 @@ function make_toc(content_el ,container_el) {
         for (var m = el.firstChild; m != null; m = m.nextSibling) {
             if (m.nodeType != 1) continue;
             if (m.tagName == "PRE" || m.tagName == "CODE") continue;
-            if (m.tagName == "IMG"){
+            if (m.tagName == "IMG" && sects.length){
                 sects[sects.length-1].has_img = true;
                 continue;
             }
             if (m.tagName == "P"){
-                if(m.getElementsByTagName("IMG").length != 0)
+                if(m.getElementsByTagName("IMG").length != 0 && sects.length)
                     sects[sects.length-1].has_img = true;
                 continue;
             }
-            if (m.tagName.length == 2 && m.tagName.charAt(0) == "H")
+            if (m.tagName.length == 2 && m.tagName.charAt(0) == "H" && m.tagName.charAt(1) != "R")
                 sects.push({
                     level: get_level(m),
                     node: m,
@@ -125,7 +125,7 @@ function make_toc(content_el ,container_el) {
             // // Now create a link to this section.
             var link = document.createElement("a");
             link.href = "#TOC" + sectionNumber; // Set link destination
-            link.innerHTML = section.innerHTML; // Make link text same as heading
+            link.innerHTML = section.innerText||section.textContent; // Make link text same as heading
             if(n.has_img){
                 link.appendChild(document.createElement("i"));
                 addClass(link,"has-img");
