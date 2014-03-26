@@ -83,11 +83,11 @@ $(document).ready(function(){
 
     $("#md_content pre").each(function(){route_lang_handler(this)();});
 
+    // SyntaxHighlighter.defaults['html-script'] = true;
+    SyntaxHighlighter.all
+
     make_toc("md_content","md_toc");
     expand_toc('md_toc',2);
-
-    // SyntaxHighlighter.defaults['html-script'] = true;
-    SyntaxHighlighter.all();
 
     $("#md_content div.syntaxhighlighter").each(function(){
         this.style.pixelHeight = this.offsetHeight + 2;
@@ -100,6 +100,7 @@ $(document).ready(function(){
 
 });
 
+();
 
 
 
