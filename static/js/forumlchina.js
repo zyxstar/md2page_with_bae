@@ -1,16 +1,4 @@
 
-function addEvent(oTarget, eventType, listener) {
-  if (oTarget.addEventListener) {
-    oTarget.addEventListener(eventType, listener, false);
-  } else if (oTarget.attachEvent) {
-    oTarget['e' + eventType + listener] = listener;
-    oTarget[eventType + listener] = function() {
-      oTarget['e' + eventType + listener](window.event);
-    };
-    oTarget.attachEvent('on' + eventType, oTarget[eventType + listener]);
-  }
-}
-
 function process(ele){
   var lines = ele.innerHTML.split('\n');
   var talks = [];
@@ -99,12 +87,12 @@ function render(ele, speakers, talks){
 }
 
 
-addEvent(window, 'load', function(){
+(function(){
   var eles = document.querySelectorAll("td .p14");
   for(var i in eles){
     if (!eles[i].innerText) continue;
     if (eles[i].innerText.trim() === '') continue;
     process(eles[i]);
   }
-});
+})();
 
