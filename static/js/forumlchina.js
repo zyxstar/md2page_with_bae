@@ -31,7 +31,7 @@ function extract_speaker(line){
 }
 
 function render(ele, talks){
-  var COLORS = ['#B4402D','#61A0A8','#CC8561','#91C7AE','#BDA29A','#749F83','#69746F'];
+  var COLORS = ['#275300','#CC9966','#996699','#6666CC','#DB637F','#009FB1','#9ECA76','#CCCC33'];
   var MAIN_COLOR = '#000';
   var MAIN_SPEAKER = '≈Àº””Ó';
 
