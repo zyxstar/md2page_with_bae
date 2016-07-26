@@ -2,38 +2,46 @@
 function process(ele){
   var lines = ele.innerHTML.split('\n');
   var talks = [];
-  var speakers = [];
   var line, speaker;
-  var re = /\s*(.*?)(<\/strong>)?<br>/gi;
+  var re = /\s*(.*?)<br>/gi;
   for(var i in lines){
-    line = lines[i].replace(re, '$1');
+    line = lines[i].replace('<strong>','').replace('</strong>','');
+    line = line.replace(re, '$1');
     speaker = extract_speaker(line);
     if(speaker){
       talks.push(speaker);
-      if(speakers.indexOf(speaker) == -1) speakers.push(speaker.speaker);
     }else{
       talks[talks.length-1].contents.push(line);
     }
   }
-  render(ele, speakers, talks);
+  render(ele, talks);
 }
 
 function extract_speaker(line){
-  var re = /(<strong>)?(.*?)(\d{2}:\d{2}:\d{2})/gi;
+  var re = /(.*?)(\d{1,2}:\d{1,2}:\d{1,2})/gi;
   var result = {contents: []};
   if(line.match(re)){
     line.replace(re, function(){
-      result.speaker = arguments[2].trim();
-      result.time = arguments[3];
+      result.speaker = arguments[1].trim();
+      result.time = arguments[2];
     });
     return result;
   }
   return null;
 }
 
-function render(ele, speakers, talks){
+function render(ele, talks){
   var COLORS = ['#B4402D','#61A0A8','#CC8561','#91C7AE','#BDA29A','#749F83','#69746F'];
   var MAIN_COLOR = '#000';
+  var MAIN_SPEAKER = '≈Àº””Ó';
+
+  var speakers = talks.map(function(talk){return talk.speaker;})
+                      .filter(function(speaker){return speaker.indexOf(MAIN_SPEAKER) == -1;})
+					  .reduce(function(acc, speaker){
+						if(acc.indexOf(speaker) == -1)
+							acc.push(speaker);
+						return acc;
+					  }, []);
 
   ele.innerHTML = talks.map(function(talk){
     var div = document.createElement('DIV');
@@ -41,7 +49,7 @@ function render(ele, speakers, talks){
     speaker_p.style.margin = '1em 0 0 0';
     speaker_p.appendChild(document.createTextNode(talk.speaker));
 
-    if(talk.speaker.indexOf('≈Àº””Ó') != -1){
+    if(talk.speaker.indexOf(MAIN_SPEAKER) != -1){
       div.style.fontWeight = 'bold';
       div.style.color = MAIN_COLOR;
       div.style.float = 'right';
